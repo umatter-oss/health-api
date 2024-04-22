@@ -1,0 +1,43 @@
+{
+    "micronaut": {
+        "application": {
+            "name": "health-api"
+        },
+        "health": {
+            "monitor": {
+                "enabled": true
+            }
+        }
+    },
+    "endpoints": {
+        "beans": {
+            "enabled": true,
+            "sensitive": true
+        },
+        "info": {
+            "enabled": true,
+            "sensitive": true
+        },
+        "health": {
+            "enabled": true,
+            "sensitive": false
+        },
+        "metrics": {
+            "enabled": true,
+            "sensitive": true
+        },
+        "refresh": {
+            "enabled": true,
+            "sensitive": true
+        },
+        "routes": {
+            "enabled": true,
+            "sensitive": true
+        },
+        "loggers": {
+            "enabled": true,
+            "sensitive": true,
+            "write-sensitive": true
+        }
+    }
+}
