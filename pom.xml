@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>agency.umatter.health</groupId>
   <artifactId>api</artifactId>
-  <version>0.0.0</version>
+  <version>${version}</version>
   <packaging>${packaging}</packaging>
 
   <parent>
@@ -21,6 +22,12 @@
     <micronaut.aot.packageName>agency.umatter.health.aot.generated</micronaut.aot.packageName>
     <micronaut.runtime>netty</micronaut.runtime>
     <exec.mainClass>agency.umatter.health.Application</exec.mainClass>
+    <version>${VERSION}</version>
+    <jar.registry>${JAR_REGISTRY}</jar.registry>
+    <jar.path>${JAR_PATH}</jar.path>
+    <image.registry>${IMAGE_REGISTRY}</image.registry>
+    <image.path>${IMAGE_PATH}</image.path>
+    <image.version>${version}</image.version>
   </properties>
 
   <repositories>
@@ -73,6 +80,7 @@
     </dependency>
   </dependencies>
   <build>
+    <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
     <plugins>
       <plugin>
         <groupId>io.micronaut.maven</groupId>
@@ -118,11 +126,19 @@
         <artifactId>jib-maven-plugin</artifactId>
         <configuration>
           <to>
-            <image>${project.groupId}.${project.artifactId}:${project.version}</image>
+            <image>${image.registry}/${image.path}:${image.version}</image>
           </to>
         </configuration>
       </plugin>
     </plugins>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>${jar.registry}/${jar.path}</url>
+    </repository>
+  </distributionManagement>
 
 </project>
