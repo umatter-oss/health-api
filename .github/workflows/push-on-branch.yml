@@ -68,8 +68,8 @@ jobs:
           cache: "maven"
       - name: Test the code
         run: ./mvnw clean test
-  package:
-    name: Package the code
+  package-jar:
+    name: Package the jar of the code
     needs:
       - test
     runs-on: ubuntu-latest
@@ -83,7 +83,7 @@ jobs:
           java-version: "21"
           cache: "maven"
       - name: Package the code
-        run: ./mvnw clean package -Dproject.version=${{ github.ref_name }}
+        run: ./mvnw clean package -Dversion=${{ github.ref_name }}
       - name: Upload the package
         uses: actions/upload-artifact@v4.3.3
         with:
