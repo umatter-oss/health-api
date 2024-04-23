@@ -93,7 +93,7 @@ jobs:
   deploy-jar:
     name: Deploy the jar of the code
     needs:
-      - package
+      - package-jar
     runs-on: ubuntu-latest
     steps:
       - name: Check out the code
