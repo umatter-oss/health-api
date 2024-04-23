@@ -85,6 +85,8 @@ jobs:
       - name: Change project version
         run: ./mvnw versions:set -DnewVersion=${{ github.ref_name }}
       - name: Package the code
+        env:
+          VERSION: ${{ github.ref_name }}
         run: ./mvnw clean package
       - name: Upload the package
         uses: actions/upload-artifact@v4.3.3
@@ -107,10 +109,10 @@ jobs:
           distribution: "temurin"
           java-version: "21"
           cache: "maven"
-      - name: Change project version
-        run: ./mvnw versions:set -DnewVersion=${{ github.ref_name }}
       - name: Deploy the jar of the code
         env:
-          GIHUB_OWNER_REPOSITORY: ${{ github.repository }}
+          VERSION: ${{ github.ref_name }}
+          JAR_REGISTRY: https://maven.pkg.github.com
+          JAR_PATH: ${{ github.repository }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
         run: ./mvnw deploy

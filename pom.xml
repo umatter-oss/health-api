@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>agency.umatter.health</groupId>
   <artifactId>api</artifactId>
-  <version>0.0.0</version>
+  <version>${version}</version>
   <packaging>${packaging}</packaging>
 
   <parent>
@@ -22,9 +22,12 @@
     <micronaut.aot.packageName>agency.umatter.health.aot.generated</micronaut.aot.packageName>
     <micronaut.runtime>netty</micronaut.runtime>
     <exec.mainClass>agency.umatter.health.Application</exec.mainClass>
-    <github.owner.repository>${GIHUB_OWNER_REPOSITORY}</github.owner.repository>
-    <image.registry>${IMAGE_REGISTRY}</image.registry>
+    <version>${VERSION}</version>
+    <jar.registry>${JAR_REGISTRY}</jar.registry>
+    <jar.path>${JAR_PATH}</jar.path>
+    <image.registry>${IMAGE_REGISRY}</image.registry>
     <image.path>${IMAGE_PATH}</image.path>
+    <image.version>${version}</image.version>
   </properties>
 
   <repositories>
@@ -122,7 +125,7 @@
         <artifactId>jib-maven-plugin</artifactId>
         <configuration>
           <to>
-            <image>${image.registry}.${image.path}:${project.version}</image>
+            <image>${image.registry}/${image.path}:${image.version}</image>
           </to>
         </configuration>
       </plugin>
@@ -133,7 +136,7 @@
     <repository>
       <id>github</id>
       <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/${github.owner.repository}</url>
+      <url>${jar.registry}/${jar.path}</url>
     </repository>
   </distributionManagement>
 
