@@ -6,6 +6,7 @@ buildTool: maven
 features:
   [
     app-name,
+    graalvm,
     http-client-test,
     java,
     java-application,
