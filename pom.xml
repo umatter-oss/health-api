@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>agency.umatter.health</groupId>
   <artifactId>api</artifactId>
@@ -21,6 +22,9 @@
     <micronaut.aot.packageName>agency.umatter.health.aot.generated</micronaut.aot.packageName>
     <micronaut.runtime>netty</micronaut.runtime>
     <exec.mainClass>agency.umatter.health.Application</exec.mainClass>
+    <github.owner.repository>${GIHUB_OWNER_REPOSITORY}</github.owner.repository>
+    <image.registry>${IMAGE_REGISTRY}</image.registry>
+    <image.path>${IMAGE_PATH}</image.path>
   </properties>
 
   <repositories>
@@ -118,11 +122,19 @@
         <artifactId>jib-maven-plugin</artifactId>
         <configuration>
           <to>
-            <image>${project.groupId}.${project.artifactId}:${project.version}</image>
+            <image>${image.registry}.${image.path}:${project.version}</image>
           </to>
         </configuration>
       </plugin>
     </plugins>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/${github.owner.repository}</url>
+    </repository>
+  </distributionManagement>
 
 </project>
