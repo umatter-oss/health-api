@@ -93,6 +93,7 @@ jobs:
   deploy-jar:
     name: Deploy the jar of the code
     permissions:
+      contents: read
       packages: write
     needs:
       - package-jar
