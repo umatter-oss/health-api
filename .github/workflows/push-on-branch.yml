@@ -131,7 +131,7 @@ jobs:
         env:
           IMAGE_REGISTRY: ghcr.io
           IMAGE_PATH: ${{ github.repository }}
-        run: ./mvnw package -Dpackaging=docker-native
+        run: ./mvnw package -Dpackaging=docker-native -Pgraalvm
       - name: Save image of the code to a tar archive.
         run: "docker save -o image.tar ${IMAGE_REGISTRY}/${IMAGE_PATH}:${VERSION}"
       - name: Upload the image of the code
@@ -160,4 +160,4 @@ jobs:
           IMAGE_REGISTRY: ghcr.io
           IMAGE_PATH: ${{ github.repository }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-        run: ./mvnw deploy -Dpackaging=docker-native
+        run: ./mvnw deploy -Dpackaging=docker-native -Pgraalvm
