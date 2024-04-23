@@ -25,7 +25,7 @@
     <version>${VERSION}</version>
     <jar.registry>${JAR_REGISTRY}</jar.registry>
     <jar.path>${JAR_PATH}</jar.path>
-    <image.registry>${IMAGE_REGISRY}</image.registry>
+    <image.registry>${IMAGE_REGISTRY}</image.registry>
     <image.path>${IMAGE_PATH}</image.path>
     <image.version>${version}</image.version>
   </properties>
