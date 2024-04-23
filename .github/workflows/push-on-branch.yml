@@ -21,6 +21,8 @@ jobs:
         run: ./mvnw clean validate
   compile:
     name: Compile the code
+    needs:
+      - validate
     runs-on: ubuntu-latest
     steps:
       - name: Check out the code
@@ -35,6 +37,8 @@ jobs:
         run: ./mvnw clean compile
   compile-test:
     name: Compile the test
+    needs:
+      - validate
     runs-on: ubuntu-latest
     steps:
       - name: Check out the code
@@ -49,6 +53,9 @@ jobs:
         run: ./mvnw clean test-compile
   test:
     name: Test the code
+    needs:
+      - compile
+      - compile-test
     runs-on: ubuntu-latest
     steps:
       - name: Check out the code
@@ -63,6 +70,8 @@ jobs:
         run: ./mvnw clean test
   package:
     name: Package the code
+    needs:
+      - test
     runs-on: ubuntu-latest
     steps:
       - name: Check out the code
@@ -73,6 +82,8 @@ jobs:
           distribution: "temurin"
           java-version: "21"
           cache: "maven"
+      - name: Change version with branch name
+        run: ./mvnw versions:set -DnewVersion=${{ github.ref_name }}
       - name: Package the code
         run: ./mvnw clean package
       - name: Upload the package
