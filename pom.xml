@@ -113,6 +113,15 @@
           </compilerArgs>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <configuration>
+          <to>
+            <image>${project.groupId}.${project.artifactId}:${project.version}</image>
+          </to>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
