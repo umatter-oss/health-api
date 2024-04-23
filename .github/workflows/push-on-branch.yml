@@ -144,7 +144,7 @@ jobs:
       contents: read
       packages: write
     needs:
-      - package-jar
+      - package-image
     runs-on: ubuntu-latest
     steps:
       - name: Check out the code
