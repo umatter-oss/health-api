@@ -92,6 +92,8 @@ jobs:
           path: target/**.jar
   deploy-jar:
     name: Deploy the jar of the code
+    permissions:
+      packages: write
     needs:
       - package-jar
     runs-on: ubuntu-latest
