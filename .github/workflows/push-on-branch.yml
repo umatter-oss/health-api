@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - "*"
+env:
+  VERSION: ${{ github.ref_name }}
 jobs:
   validate:
     name: Validate the set up
@@ -18,7 +20,7 @@ jobs:
           java-version: "21"
           cache: "maven"
       - name: Validate the set up
-        run: ./mvnw clean validate
+        run: ./mvnw validate
   compile:
     name: Compile the code
     needs:
@@ -34,7 +36,7 @@ jobs:
           java-version: "21"
           cache: "maven"
       - name: Compile the code
-        run: ./mvnw clean compile
+        run: ./mvnw compile
   compile-test:
     name: Compile the test
     needs:
@@ -50,7 +52,7 @@ jobs:
           java-version: "21"
           cache: "maven"
       - name: Compile the tests
-        run: ./mvnw clean test-compile
+        run: ./mvnw test-compile
   test:
     name: Test the code
     needs:
@@ -67,7 +69,7 @@ jobs:
           java-version: "21"
           cache: "maven"
       - name: Test the code
-        run: ./mvnw clean test
+        run: ./mvnw test
   package-jar:
     name: Package the jar of the code
     needs:
@@ -82,12 +84,8 @@ jobs:
           distribution: "temurin"
           java-version: "21"
           cache: "maven"
-      - name: Change project version
-        run: ./mvnw versions:set -DnewVersion=${{ github.ref_name }}
       - name: Package the code
-        env:
-          VERSION: ${{ github.ref_name }}
-        run: ./mvnw clean package
+        run: ./mvnw package
       - name: Upload the package
         uses: actions/upload-artifact@v4.3.3
         with:
@@ -111,7 +109,6 @@ jobs:
           cache: "maven"
       - name: Deploy the jar of the code
         env:
-          VERSION: ${{ github.ref_name }}
           JAR_REGISTRY: https://maven.pkg.github.com
           JAR_PATH: ${{ github.repository }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
