@@ -1,9 +1,6 @@
 name: Pushed commits
 run-name: Pushed commit on branch ${{ github.ref_name }} by @${{ github.actor }}.
-on:
-  push:
-    branches:
-      - "*"
+on: [push]
 env:
   VERSION: ${{ github.ref_name }}
 jobs:
