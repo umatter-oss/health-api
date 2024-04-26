@@ -1,5 +1,5 @@
-name: Pushed commits
-run-name: Pushed commit on branch ${{ github.ref_name }} by @${{ github.actor }}.
+name: Compile / Test actions
+run-name: Pushed commit(s) on branch ${{ github.ref_name }} by @${{ github.actor }}.
 on: [push]
 env:
   VERSION: ${{ github.ref_name }} | tr / -
@@ -67,33 +67,3 @@ jobs:
           cache: "maven"
       - name: Test the code
         run: ./mvnw test
-  publish-image:
-    name: Publish the image of the code
-    env:
-      IMAGE_REGISTRY: ghcr.io
-      IMAGE_PATH: ${{ github.repository }}
-    permissions:
-      contents: read
-      packages: write
-    needs:
-      - test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the code
-        uses: actions/checkout@v4.1.3
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4.2.1
-        with:
-          distribution: "temurin"
-          java-version: "21"
-          cache: "maven"
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3.1.0
-        with:
-          registry: ${{ env.IMAGE_REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish the image of the code
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-        run: ./mvnw deploy -Dpackaging=docker
