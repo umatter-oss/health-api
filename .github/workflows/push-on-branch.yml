@@ -2,7 +2,7 @@ name: Pushed commits
 run-name: Pushed commit on branch ${{ github.ref_name }} by @${{ github.actor }}.
 on: [push]
 env:
-  VERSION: ${{ github.ref_name }}
+  VERSION: ${{ github.ref_name }} | tr / -
 jobs:
   validate:
     name: Validate the set up
